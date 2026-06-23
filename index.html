@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finnovative Consulting — Client Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .form-section { display: none; }
+        .form-section.active { display: block; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .input-focus-ring:focus { outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); border-color: #3b82f6; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <div class="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 text-white mb-4 shadow-lg">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h1 class="text-3xl font-bold text-slate-900 mb-2">Finnovative Consulting</h1>
+            <h2 class="text-xl text-slate-600 font-medium">New Client Onboarding Questionnaire</h2>
+            <p class="mt-4 text-slate-500 max-w-2xl mx-auto">Welcome aboard! This helps us understand your business to set up your compliance and accounting correctly from day one. If something doesn't apply, select "N/A".</p>
+        </div>
+
+        <!-- Form Container -->
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+            
+            <!-- Progress Bar -->
+            <div class="bg-slate-100 h-2 w-full">
+                <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300" style="width: 11%;"></div>
+            </div>
+
+            <div class="p-8 sm:p-10">
+                <form id="onboarding-form">
+                    
+                    <!-- SECTION 1 -->
+                    <div class="form-section active" id="sec-1">
+                        <h3 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-6">Section 1 — Company Basics</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Registered legal name of the entity</label>
+                                <input type="text" id="q_legal_name" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="e.g. Acme Corp Pvt Ltd">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Brand/trade name (if different)</label>
+                                <input type="text" id="q_brand_name" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="e.g. Acme">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Date of incorporation</label>
+                                <input type="date" id="q_inc_date" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Entity type</label>
+                                <select id="q_entity_type" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors bg-white">
+                                    <option value="">Select entity type...</option>
+                                    <option value="Private Limited">Private Limited</option>
+                                    <option value="LLP">LLP</option>
+                                    <option value="Sole Proprietorship">Sole Proprietorship</option>
+                                    <option value="C-Corp">C-Corp</option>
+                                    <option value="LLC">LLC</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Country and state of incorporation</label>
+                                <input type="text" id="q_country_state" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="e.g. Delaware, USA">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Company registration number / CIN</label>
+                                <input type="text" id="q_cin" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Registered office address</label>
+                                <textarea id="q_reg_address" rows="2" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors"></textarea>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Principal place of business (if different)</label>
+                                <textarea id="q_prin_address" rows="2" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Tax identification numbers</label>
+                                <input type="text" id="q_tax_ids" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="PAN, GSTIN, EIN, VAT, etc.">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Website and primary product URL</label>
+                                <input type="url" id="q_website" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="https://...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2 -->
+                    <div class="form-section" id="sec-2">
+                        <h3 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-6">Section 2 — Ownership & People</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Names of founders/directors and their shareholding %</label>
+                                <textarea id="q_founders" rows="3" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="e.g. Jane Doe - 60%, John Smith - 40%"></textarea>
+                            </div>
+
+                            <!-- Conditional: Foreign Ownership -->
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Is there any foreign ownership or investment?</label>
+                                <div class="flex gap-6 mb-2">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_foreign_own" value="Yes" class="w-4 h-4 text-blue-600" onchange="toggleField('d_foreign_own', true)"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_foreign_own" value="No" class="w-4 h-4 text-blue-600" onchange="toggleField('d_foreign_own', false)"> <span class="ml-2 text-slate-700">No</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_foreign_own" value="N/A" class="w-4 h-4 text-blue-600" onchange="toggleField('d_foreign_own', false)"> <span class="ml-2 text-slate-700">N/A</span></label>
+                                </div>
+                                <div id="d_foreign_own" class="hidden mt-3">
+                                    <input type="text" id="q_foreign_own_details" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring text-sm" placeholder="Please specify country and %">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Number of current employees</label>
+                                    <input type="text" id="q_employees" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="Rough split: full-time, part-time, contractors">
+                                </div>
+                            </div>
+
+                            <!-- Conditional: Foreign Employees -->
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Do you have any employees or contractors based outside your home country?</label>
+                                <div class="flex gap-6 mb-2">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_foreign_emp" value="Yes" class="w-4 h-4 text-blue-600" onchange="toggleField('d_foreign_emp', true)"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_foreign_emp" value="No" class="w-4 h-4 text-blue-600" onchange="toggleField('d_foreign_emp', false)"> <span class="ml-2 text-slate-700">No</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_foreign_emp" value="N/A" class="w-4 h-4 text-blue-600" onchange="toggleField('d_foreign_emp', false)"> <span class="ml-2 text-slate-700">N/A</span></label>
+                                </div>
+                                <div id="d_foreign_emp" class="hidden mt-3">
+                                    <input type="text" id="q_foreign_emp_details" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring text-sm" placeholder="Where are they located?">
+                                </div>
+                            </div>
+
+                             <!-- Conditional: Finance Person -->
+                             <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Do you currently have a designated finance/accounts person internally?</label>
+                                <div class="flex gap-6 mb-2">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_finance_person" value="Yes" class="w-4 h-4 text-blue-600" onchange="toggleField('d_finance_person', true)"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_finance_person" value="No" class="w-4 h-4 text-blue-600" onchange="toggleField('d_finance_person', false)"> <span class="ml-2 text-slate-700">No</span></label>
+                                </div>
+                                <div id="d_finance_person" class="hidden mt-3">
+                                    <input type="text" id="q_finance_person_details" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring text-sm" placeholder="Name and role">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 3 -->
+                    <div class="form-section" id="sec-3">
+                        <h3 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-6">Section 3 — The Product & Business Model</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">In one or two lines, what does your product do and who is it for?</label>
+                                <textarea id="q_product_desc" rows="2" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors"></textarea>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Pricing model</label>
+                                    <input type="text" id="q_pricing_model" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="Subscription, usage-based, freemium, one-time...">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Average contract value & typical billing cycle</label>
+                                    <input type="text" id="q_acv" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="e.g. $5k / Annual">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Roughly what is your current MRR?</label>
+                                    <input type="text" id="q_mrr" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="Monthly Recurring Revenue (if any)">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Payment timing</label>
+                                    <select id="q_payment_timing" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors bg-white">
+                                        <option value="">Select...</option>
+                                        <option value="In advance">In advance</option>
+                                        <option value="In arrears">In arrears</option>
+                                        <option value="Both">Both</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Do you offer free trials or freemium tiers?</label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_freemium" value="Yes" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_freemium" value="No" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">No</span></label>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Do you have any annual or multi-year contracts? (relevant for revenue recognition)</label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_multi_year" value="Yes" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_multi_year" value="No" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">No</span></label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Sales channels</label>
+                                <input type="text" id="q_sales_channels" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="Direct, resellers, AWS marketplace, app stores, etc.">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 4 -->
+                    <div class="form-section" id="sec-4">
+                        <h3 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-6">Section 4 — Customers & Geography</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Where are your customers located? (list main countries/regions)</label>
+                                <textarea id="q_customer_geo" rows="2" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors"></textarea>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Are your customers primarily businesses (B2B), consumers (B2C), or both?</label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_b2b" value="B2B" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">B2B</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_b2b" value="B2C" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">B2C</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_b2b" value="Both" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">Both</span></label>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Do you sell to customers in jurisdictions with digital/SaaS sales tax or VAT obligations? (e.g., EU VAT, US state sales tax, GST)</label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_sales_tax" value="Yes" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_sales_tax" value="No" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">No</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_sales_tax" value="Not sure" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">Not sure</span></label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">What currencies do you invoice and receive payment in?</label>
+                                <input type="text" id="q_currencies" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="USD, EUR, INR, etc.">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 5 -->
+                    <div class="form-section" id="sec-5">
+                        <h3 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-6">Section 5 — Payments & Banking</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Which payment gateways/processors do you use?</label>
+                                <input type="text" id="q_gateways" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="Stripe, Razorpay, Paddle, Chargebee, etc.">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">List your business bank accounts (bank name, currency, country)</label>
+                                <textarea id="q_banks" rows="3" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="e.g. Mercury - USD - USA"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Do you use any payout/treasury platforms?</label>
+                                <input type="text" id="q_treasury" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="Wise, PayPal, Payoneer, etc.">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">How do payment processor settlements currently flow into your books, if at all?</label>
+                                <textarea id="q_settlements" rows="2" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 6 -->
+                    <div class="form-section" id="sec-6">
+                        <h3 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-6">Section 6 — Current Accounting & Systems</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Accounting software</label>
+                                    <input type="text" id="q_acct_soft" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="QuickBooks, Xero, Zoho, None">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Billing/subscription management tool</label>
+                                    <input type="text" id="q_billing_soft" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Expense management/payroll software</label>
+                                    <input type="text" id="q_hr_soft" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Who has been handling bookkeeping so far?</label>
+                                    <input type="text" id="q_bookkeeper" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="In-house, freelancer, nobody yet">
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Are your books currently up to date?</label>
+                                <div class="flex gap-6 mb-2">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_books_updated" value="Yes" class="w-4 h-4 text-blue-600" onchange="toggleField('d_books_updated', true)"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_books_updated" value="No" class="w-4 h-4 text-blue-600" onchange="toggleField('d_books_updated', false)"> <span class="ml-2 text-slate-700">No</span></label>
+                                </div>
+                                <div id="d_books_updated" class="hidden mt-3">
+                                    <input type="text" id="q_books_date" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring text-sm" placeholder="Through what date? (e.g., Dec 2023)">
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Do you have a chart of accounts set up already?</label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_coa" value="Yes" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_coa" value="No" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">No</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_coa" value="Not sure" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">Not sure</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 7 -->
+                    <div class="form-section" id="sec-7">
+                        <h3 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-6">Section 7 — Compliance & Tax</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Which registrations are already done?</label>
+                                <input type="text" id="q_registrations" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="GST/VAT, payroll/PF/ESI, professional tax, etc.">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Which filings are currently due or overdue, to your knowledge?</label>
+                                <input type="text" id="q_overdue" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors">
+                            </div>
+
+                            <!-- Conditionals -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                    <label class="block text-sm font-medium text-slate-800 mb-3">Have you filed any tax returns since incorporation?</label>
+                                    <div class="flex gap-4 mb-2">
+                                        <label class="flex items-center cursor-pointer"><input type="radio" name="r_tax_returns" value="Yes" class="w-4 h-4 text-blue-600" onchange="toggleField('d_tax_returns', true)"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                        <label class="flex items-center cursor-pointer"><input type="radio" name="r_tax_returns" value="No" class="w-4 h-4 text-blue-600" onchange="toggleField('d_tax_returns', false)"> <span class="ml-2 text-slate-700">No</span></label>
+                                    </div>
+                                    <div id="d_tax_returns" class="hidden mt-3">
+                                        <input type="text" id="q_tax_returns_details" class="w-full border border-slate-300 rounded-lg px-3 py-2 input-focus-ring text-sm" placeholder="Which years/periods?">
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                    <label class="block text-sm font-medium text-slate-800 mb-3">Any notices, penalties, or open issues with tax authorities?</label>
+                                    <div class="flex gap-4 mb-2">
+                                        <label class="flex items-center cursor-pointer"><input type="radio" name="r_notices" value="Yes" class="w-4 h-4 text-blue-600" onchange="toggleField('d_notices', true)"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                        <label class="flex items-center cursor-pointer"><input type="radio" name="r_notices" value="No" class="w-4 h-4 text-blue-600" onchange="toggleField('d_notices', false)"> <span class="ml-2 text-slate-700">No</span></label>
+                                    </div>
+                                    <div id="d_notices" class="hidden mt-3">
+                                        <input type="text" id="q_notices_details" class="w-full border border-slate-300 rounded-lg px-3 py-2 input-focus-ring text-sm" placeholder="Briefly describe">
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                    <label class="block text-sm font-medium text-slate-800 mb-3">Are there any equity/ESOP arrangements, SAFEs, or convertible notes in place?</label>
+                                    <div class="flex gap-4 mb-2">
+                                        <label class="flex items-center cursor-pointer"><input type="radio" name="r_esop" value="Yes" class="w-4 h-4 text-blue-600" onchange="toggleField('d_esop', true)"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                        <label class="flex items-center cursor-pointer"><input type="radio" name="r_esop" value="No" class="w-4 h-4 text-blue-600" onchange="toggleField('d_esop', false)"> <span class="ml-2 text-slate-700">No</span></label>
+                                    </div>
+                                    <div id="d_esop" class="hidden mt-3">
+                                        <input type="text" id="q_esop_details" class="w-full border border-slate-300 rounded-lg px-3 py-2 input-focus-ring text-sm" placeholder="Details">
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                    <label class="block text-sm font-medium text-slate-800 mb-3">Have you raised any external funding to date?</label>
+                                    <div class="flex gap-4 mb-2">
+                                        <label class="flex items-center cursor-pointer"><input type="radio" name="r_funding" value="Yes" class="w-4 h-4 text-blue-600" onchange="toggleField('d_funding', true)"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                        <label class="flex items-center cursor-pointer"><input type="radio" name="r_funding" value="No" class="w-4 h-4 text-blue-600" onchange="toggleField('d_funding', false)"> <span class="ml-2 text-slate-700">No</span></label>
+                                    </div>
+                                    <div id="d_funding" class="hidden mt-3">
+                                        <input type="text" id="q_funding_details" class="w-full border border-slate-300 rounded-lg px-3 py-2 input-focus-ring text-sm" placeholder="Round type, amount, date">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <label class="block text-sm font-medium text-slate-800 mb-3">Do you have statutory auditors appointed?</label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_auditors" value="Yes" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">Yes</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_auditors" value="No" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">No</span></label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="r_auditors" value="N/A" class="w-4 h-4 text-blue-600"> <span class="ml-2 text-slate-700">N/A</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 8 -->
+                    <div class="form-section" id="sec-8">
+                        <h3 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-6">Section 8 — Documents Checklist</h3>
+                        <p class="text-sm text-slate-500 mb-4">Please check the boxes for the documents you have readily available. You will be prompted to attach these when the final email is generated.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-start p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                                <input type="checkbox" id="chk_doc1" value="Certificate of Incorporation & MOA/AOA" class="mt-1 w-4 h-4 text-blue-600 rounded">
+                                <span class="ml-3 text-sm text-slate-700">Certificate of incorporation and constitutional documents (MOA/AOA, LLP agreement, bylaws)</span>
+                            </label>
+                            <label class="flex items-start p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                                <input type="checkbox" id="chk_doc2" value="Tax Registration Certificates" class="mt-1 w-4 h-4 text-blue-600 rounded">
+                                <span class="ml-3 text-sm text-slate-700">Tax registration certificates</span>
+                            </label>
+                            <label class="flex items-start p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                                <input type="checkbox" id="chk_doc3" value="Bank Statements (Last 3m)" class="mt-1 w-4 h-4 text-blue-600 rounded">
+                                <span class="ml-3 text-sm text-slate-700">Latest bank statements (last 3 months)</span>
+                            </label>
+                            <label class="flex items-start p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                                <input type="checkbox" id="chk_doc4" value="Cap Table" class="mt-1 w-4 h-4 text-blue-600 rounded">
+                                <span class="ml-3 text-sm text-slate-700">Cap table / shareholding summary</span>
+                            </label>
+                            <label class="flex items-start p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                                <input type="checkbox" id="chk_doc5" value="Financial Statements" class="mt-1 w-4 h-4 text-blue-600 rounded">
+                                <span class="ml-3 text-sm text-slate-700">Any existing financial statements or management accounts</span>
+                            </label>
+                            <label class="flex items-start p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                                <input type="checkbox" id="chk_doc6" value="Sample Invoice & Contract" class="mt-1 w-4 h-4 text-blue-600 rounded">
+                                <span class="ml-3 text-sm text-slate-700">Sample customer invoice and a sample customer contract</span>
+                            </label>
+                            <label class="flex items-start p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                                <input type="checkbox" id="chk_doc7" value="Payment Processor Reports" class="mt-1 w-4 h-4 text-blue-600 rounded">
+                                <span class="ml-3 text-sm text-slate-700">Payment processor account access or recent settlement reports</span>
+                            </label>
+                            <label class="flex items-start p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                                <input type="checkbox" id="chk_doc8" value="Prior Tax Filings" class="mt-1 w-4 h-4 text-blue-600 rounded">
+                                <span class="ml-3 text-sm text-slate-700">Prior tax filings, if any</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 9 -->
+                    <div class="form-section" id="sec-9">
+                        <h3 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-6">Section 9 — Goals & Future Scope</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">What are your top 1–3 priorities for us over the next 90 days?</label>
+                                <textarea id="q_priorities" rows="3" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Are there upcoming events we should plan for?</label>
+                                <input type="text" id="q_events" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="Funding round, new market entry, first audit, hiring abroad...">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Beyond compliance and setup, what might you need help with later?</label>
+                                <input type="text" id="q_future_help" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="Fundraising support, MIS/dashboards, payroll, virtual CFO...">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Main Point of Contact Name</label>
+                                    <input type="text" id="q_poc_name" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Best way and time to reach them</label>
+                                    <input type="text" id="q_poc_contact" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors" placeholder="Email / Phone, Mornings, etc.">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Is there anything else about your business we should know to serve you well?</label>
+                                <textarea id="q_anything_else" rows="2" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 input-focus-ring transition-colors"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Completion Screen -->
+                        <div id="completion-box" class="hidden mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6 text-center">
+                            <h4 class="text-lg font-bold text-blue-900 mb-2">All set to send!</h4>
+                            <p class="text-sm text-blue-700 mb-4">Click below to generate a pre-formatted email containing your responses. <br><b>Don't forget to attach your documents!</b></p>
+                            
+                            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                                <button type="button" onclick="generateEmail()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg shadow transition-colors flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                    Generate Email to Finnovative
+                                </button>
+                                <button type="button" onclick="copyToClipboard()" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-medium py-3 px-6 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                    Copy Responses
+                                </button>
+                            </div>
+                            <p id="copy-success" class="text-green-600 text-sm mt-2 hidden font-medium">Copied to clipboard! You can now paste this into an email.</p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="mt-10 flex justify-between items-center pt-6 border-t border-slate-200">
+                        <button type="button" id="btn-prev" onclick="changeSection(-1)" class="hidden bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 font-medium py-2.5 px-5 rounded-lg transition">Back</button>
+                        <div class="flex-1"></div> <!-- Spacer -->
+                        <button type="button" id="btn-next" onclick="changeSection(1)" class="bg-blue-600 text-white hover:bg-blue-700 font-medium py-2.5 px-8 rounded-lg shadow transition">Next Section</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <p class="text-center text-slate-400 text-sm mt-6">Data is processed locally in your browser to generate the email draft.</p>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 9;
+
+        // Function to toggle conditional input fields based on radio selection
+        function toggleField(divId, show) {
+            const div = document.getElementById(divId);
+            if (show) {
+                div.classList.remove('hidden');
+                div.querySelector('input').focus();
+            } else {
+                div.classList.add('hidden');
+                div.querySelector('input').value = ''; // clear value if hidden
+            }
+        }
+
+        // Handle navigation between form sections
+        function changeSection(step) {
+            const nextSection = currentSection + step;
+            if (nextSection < 1 || nextSection > totalSections) return;
+
+            // Hide current
+            document.getElementById(`sec-${currentSection}`).classList.remove('active');
+            
+            // Update variable
+            currentSection = nextSection;
+            
+            // Show new
+            document.getElementById(`sec-${currentSection}`).classList.add('active');
+
+            // Update Progress Bar
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+
+            // Button visibility
+            document.getElementById('btn-prev').style.display = currentSection === 1 ? 'none' : 'block';
+            
+            if (currentSection === totalSections) {
+                document.getElementById('btn-next').style.display = 'none';
+                document.getElementById('completion-box').classList.remove('hidden');
+            } else {
+                document.getElementById('btn-next').style.display = 'block';
+                document.getElementById('completion-box').classList.add('hidden');
+            }
+
+            // Scroll to top of form
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Helper to get radio button value
+        function getRadioValue(name) {
+            const ele = document.getElementsByName(name);
+            for (let i = 0; i < ele.length; i++) {
+                if (ele[i].checked) return ele[i].value;
+            }
+            return 'Not Provided';
+        }
+
+        // Helper to get selected checkboxes
+        function getCheckboxValues(prefix, count) {
+            let selected = [];
+            for(let i=1; i<=count; i++) {
+                let chk = document.getElementById(prefix + i);
+                if(chk && chk.checked) {
+                    selected.push("- " + chk.value);
+                }
+            }
+            return selected.length > 0 ? selected.join("\n") : "None checked.";
+        }
+
+        // Compile all form data into a formatted string
+        function compileData() {
+            const val = (id) => document.getElementById(id).value || "Not Provided";
+            const valConditional = (radioName, inputId) => {
+                let r = getRadioValue(radioName);
+                if (r === 'Yes') return `Yes - Details: ${val(inputId)}`;
+                return r;
+            };
+
+            const data = `
+=========================================
+FINNOVATIVE CONSULTING — NEW CLIENT ONBOARDING
+=========================================
+
+--- SECTION 1: COMPANY BASICS ---
+Legal Name: ${val('q_legal_name')}
+Brand/Trade Name: ${val('q_brand_name')}
+Date of Incorporation: ${val('q_inc_date')}
+Entity Type: ${val('q_entity_type')}
+Country/State: ${val('q_country_state')}
+Registration/CIN: ${val('q_cin')}
+Tax IDs: ${val('q_tax_ids')}
+Website: ${val('q_website')}
+Registered Address: ${val('q_reg_address')}
+Principal Address: ${val('q_prin_address')}
+
+--- SECTION 2: OWNERSHIP & PEOPLE ---
+Founders/Directors & %: ${val('q_founders')}
+Foreign Ownership: ${valConditional('r_foreign_own', 'q_foreign_own_details')}
+Total Employees: ${val('q_employees')}
+Foreign Employees: ${valConditional('r_foreign_emp', 'q_foreign_emp_details')}
+Internal Finance Person: ${valConditional('r_finance_person', 'q_finance_person_details')}
+
+--- SECTION 3: PRODUCT & BUSINESS MODEL ---
+Product Desc: ${val('q_product_desc')}
+Pricing Model: ${val('q_pricing_model')}
+Avg Contract Value: ${val('q_acv')}
+MRR: ${val('q_mrr')}
+Payment Timing: ${val('q_payment_timing')}
+Freemium/Trials offered: ${getRadioValue('r_freemium')}
+Multi-year Contracts: ${getRadioValue('r_multi_year')}
+Sales Channels: ${val('q_sales_channels')}
+
+--- SECTION 4: CUSTOMERS & GEOGRAPHY ---
+Customer Locations: ${val('q_customer_geo')}
+B2B or B2C: ${getRadioValue('r_b2b')}
+SaaS/Digital Tax Obligations: ${getRadioValue('r_sales_tax')}
+Currencies: ${val('q_currencies')}
+
+--- SECTION 5: PAYMENTS & BANKING ---
+Payment Gateways: ${val('q_gateways')}
+Bank Accounts: ${val('q_banks')}
+Treasury/Payouts: ${val('q_treasury')}
+Settlement Flow: ${val('q_settlements')}
+
+--- SECTION 6: ACCOUNTING & SYSTEMS ---
+Accounting Software: ${val('q_acct_soft')}
+Billing Tool: ${val('q_billing_soft')}
+HR/Expense Tool: ${val('q_hr_soft')}
+Who Handles Bookkeeping: ${val('q_bookkeeper')}
+Books Up to Date: ${valConditional('r_books_updated', 'q_books_date')}
+Chart of Accounts Set Up: ${getRadioValue('r_coa')}
+
+--- SECTION 7: COMPLIANCE & TAX ---
+Done Registrations: ${val('q_registrations')}
+Due/Overdue Filings: ${val('q_overdue')}
+Tax Returns Filed: ${valConditional('r_tax_returns', 'q_tax_returns_details')}
+Notices/Penalties: ${valConditional('r_notices', 'q_notices_details')}
+ESOP/SAFEs: ${valConditional('r_esop', 'q_esop_details')}
+External Funding: ${valConditional('r_funding', 'q_funding_details')}
+Auditors Appointed: ${getRadioValue('r_auditors')}
+
+--- SECTION 8: DOCUMENTS TO BE ATTACHED ---
+${getCheckboxValues('chk_doc', 8)}
+
+--- SECTION 9: GOALS & FUTURE SCOPE ---
+Top 90-Day Priorities: ${val('q_priorities')}
+Upcoming Events: ${val('q_events')}
+Future Help Needed: ${val('q_future_help')}
+Main POC Name: ${val('q_poc_name')}
+POC Contact Info: ${val('q_poc_contact')}
+Anything Else: ${val('q_anything_else')}
+`;
+            return data;
+        }
+
+        function generateEmail() {
+            const body = compileData();
+            const legalName = document.getElementById('q_legal_name').value || "New Client";
+            const subject = `Onboarding Submission - ${legalName}`;
+            
+            // Open default email client
+            const mailtoUrl = `mailto:hello@finnovative.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoUrl;
+        }
+
+        function copyToClipboard() {
+            const textToCopy = compileData();
+            // Use fallback method for iFrame compatibility
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                const successMsg = document.getElementById('copy-success');
+                successMsg.classList.remove('hidden');
+                setTimeout(() => { successMsg.classList.add('hidden'); }, 4000);
+            } catch (err) {
+                console.error('Unable to copy', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // Initialize display
+        document.getElementById('btn-prev').style.display = 'none';
+    </script>
+</body>
+</html>
